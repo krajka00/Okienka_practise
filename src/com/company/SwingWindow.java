@@ -1,15 +1,18 @@
 package com.company;
 
+import javax.sound.midi.Soundbank;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.util.HashMap;
 
 public class SwingWindow extends JFrame implements ActionListener   {
     JButton bOk, bCancel;
-    JButton bWyjscie;
-    JLabel lLogin, lHaslo, lWyswietlDate;
+    JLabel lLogin, lHaslo;
     JTextField tHaslo,tLogin;
+    String Login, Haslo;
+    HashMap<String, String> LoginAndPassword = new HashMap<>();
 
     private JLabel label;
 
@@ -18,6 +21,7 @@ public class SwingWindow extends JFrame implements ActionListener   {
         addToFrame();
         configure();
         przycisk();
+        data();
 
 
 
@@ -26,37 +30,61 @@ public class SwingWindow extends JFrame implements ActionListener   {
     @Override
     public void actionPerformed(ActionEvent arg0){
         Object zrodlo = arg0.getSource();
-        if(zrodlo == bOk) {
-            lWyswietlDate.setText(new Date().toString());
-            //System.out.println(new Date());
+        Login = tLogin.getText();
+        Haslo = tHaslo.getText();
+        if(zrodlo == bOk){
+           // System.out.println(Login + Haslo);
+            if (LoginAndPassword.containsKey(Login)){
+                if(LoginAndPassword.containsValue(Haslo)){
+                label.setBackground(Color.green);
+                    System.out.println("OK");
+                }
+                else if(!LoginAndPassword.containsValue(Haslo)){
+                    label.setBackground(Color.red);
+                    System.out.println("nie ok");
+
+                }
+
+            }
+            else if (!LoginAndPassword.containsKey(Login)) {
+                label.setBackground(Color.red);
+                System.out.println("Nie ok");
+            }
         }
-        else if(zrodlo == bWyjscie){
+        else if(zrodlo==bCancel){
             dispose();
         }
 
-    }
 
+
+    }
 
     private void przycisk(){
 
         lLogin = new JLabel("Login: ");
-        lLogin.setBounds(50,30,50,20);
+        lLogin.setBounds(50,50,50,20);
         add(lLogin);
-        setLayout(null);
+        //setLayout(null);
+
         lHaslo = new JLabel("Haslo:");
-        lHaslo.setBounds(50,60,50,20);
+        lHaslo.setBounds(50,80,50,20);
         add(lHaslo);
-        tLogin = new JTextField();
-        tLogin.setBounds(150,30,150,0);
+
+        tLogin = new JTextField("");
+        tLogin.setBounds(150,50,250,20);
         add(tLogin);
+        tHaslo = new JPasswordField("");
+        tHaslo.setBounds(150,80,250,20);
+        add(tHaslo);
 
         bOk = new JButton("OK");
-        bOk.setBounds(100, 100, 100, 20 );
+        bOk.setBounds(100, 130, 100, 20 );
         add(bOk);
-        bOk.addActionListener(this );
+        bOk.addActionListener(this);
         bCancel = new JButton("Cancel");
-        bCancel.setBounds(300,100,100,20);
+        bCancel.setBounds(300,130,100,20);
         add(bCancel);
+        bCancel.addActionListener(this);
 
 
     }
@@ -76,6 +104,19 @@ public class SwingWindow extends JFrame implements ActionListener   {
         setResizable(true);
         setSize(512, 256);
         setLocationRelativeTo(null);
+        setLayout(null);
+        label.setBackground(Color.red);
+        label.setForeground(Color.blue);
+
+
+    }
+    private void data(){
+        LoginAndPassword.put("Adam","haslo12345" );
+        LoginAndPassword.put("Jan123","haslo12345" );
+        LoginAndPassword.put("XDmobek","haslo12345" );
+        LoginAndPassword.put("Wojtek22","haslo12345" );
+        LoginAndPassword.put("stachuxd","haslo12345" );
+        //System.out.println(LoginAndPassword);
 
 
     }
