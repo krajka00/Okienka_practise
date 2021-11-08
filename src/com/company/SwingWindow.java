@@ -2,6 +2,7 @@ package com.company;
 
 import javax.sound.midi.Soundbank;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,20 +14,17 @@ public class SwingWindow extends JFrame implements ActionListener   {
     JTextField tHaslo,tLogin;
     String Login, Haslo;
     HashMap<String, String> LoginAndPassword = new HashMap<>();
-
-    private JLabel label;
+    JLabel label;
 
     public SwingWindow() {
-        createInstances();
-        addToFrame();
-        configure();
-        przycisk();
-        data();
-
-
-
-    }
-
+        //createInstances();
+        //addToFrame();
+        if(1==1) {
+            configure();
+            przycisk();
+            data();
+            }
+        }
     @Override
     public void actionPerformed(ActionEvent arg0){
         Object zrodlo = arg0.getSource();
@@ -36,45 +34,39 @@ public class SwingWindow extends JFrame implements ActionListener   {
            // System.out.println(Login + Haslo);
             if (LoginAndPassword.containsKey(Login)){
                 if(LoginAndPassword.containsValue(Haslo)){
-                label.setBackground(Color.green);
-                    System.out.println("OK");
+                    lLogin.setBackground(Color.white);
+                    lHaslo.setBackground(Color.white);
+                    label.setBackground(Color.green);
                 }
                 else if(!LoginAndPassword.containsValue(Haslo)){
-                    label.setBackground(Color.red);
-                    System.out.println("nie ok");
+                    label.setBackground(new Color(231, 57, 57));
+                    //System.out.println("nie ok");
 
                 }
 
             }
             else if (!LoginAndPassword.containsKey(Login)) {
-                label.setBackground(Color.red);
-                System.out.println("Nie ok");
+                label.setBackground(new Color(231, 57, 57));
             }
         }
         else if(zrodlo==bCancel){
             dispose();
         }
-
-
-
     }
 
     private void przycisk(){
 
-        lLogin = new JLabel("Login: ");
-        lLogin.setBounds(50,50,50,20);
-        add(lLogin);
-        //setLayout(null);
-
-        lHaslo = new JLabel("Haslo:");
-        lHaslo.setBounds(50,80,50,20);
-        add(lHaslo);
-
         tLogin = new JTextField("");
         tLogin.setBounds(150,50,250,20);
+        tLogin.setBackground(Color.white);
+        tLogin.setForeground(Color.black);
+        tLogin.setOpaque(true);
         add(tLogin);
         tHaslo = new JPasswordField("");
         tHaslo.setBounds(150,80,250,20);
+        tHaslo.setForeground(Color.black);
+        tHaslo.setBackground(Color.white);
+        tHaslo.setOpaque(true);
         add(tHaslo);
 
         bOk = new JButton("OK");
@@ -88,34 +80,38 @@ public class SwingWindow extends JFrame implements ActionListener   {
 
 
     }
-    private void createInstances() {
-        label = new JLabel("", SwingConstants.CENTER);
 
-    }
-
-    private void addToFrame() {
-        getContentPane().add(label);
-    }
 
     private void configure() {
         setTitle("Panel logowania");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setResizable(true);
         setSize(512, 256);
-        setLocationRelativeTo(null);
+        lLogin = new JLabel("Login: ");
+        lLogin.setBounds(50,50,50,20);
+        lLogin.setBackground(Color.white);
+        lLogin.setOpaque(true);
+        add(lLogin);
+
+        lHaslo = new JLabel("Haslo:");
+        lHaslo.setBounds(50,80,50,20);
+        lHaslo.setBackground(Color.white);
+        lHaslo.setOpaque(true);
+        add(lHaslo);
         setLayout(null);
-        label.setBackground(Color.red);
-        label.setForeground(Color.blue);
-
-
+        label = new JLabel("");
+        label.setBounds(0,0,512,256);
+        label.setOpaque(true);
+        label.setBackground(Color.white);
+        this.add(label);
     }
+
     private void data(){
-        LoginAndPassword.put("Adam","haslo12345" );
-        LoginAndPassword.put("Jan123","haslo12345" );
-        LoginAndPassword.put("XDmobek","haslo12345" );
-        LoginAndPassword.put("Wojtek22","haslo12345" );
-        LoginAndPassword.put("stachuxd","haslo12345" );
+        LoginAndPassword.put("Gracz1","haslo12345" );
+        LoginAndPassword.put("Jan123","haslo1234" );
+        LoginAndPassword.put("Kacper6","haslo123" );
+        LoginAndPassword.put("Wojtek","haslo12" );
+        LoginAndPassword.put("Marcin","haslo1" );
         //System.out.println(LoginAndPassword);
 
 
