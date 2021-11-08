@@ -40,7 +40,6 @@ public class SwingWindow extends JFrame implements ActionListener   {
                 }
                 else if(!LoginAndPassword.containsValue(Haslo)){
                     label.setBackground(new Color(231, 57, 57));
-                    //System.out.println("nie ok");
 
                 }
 
