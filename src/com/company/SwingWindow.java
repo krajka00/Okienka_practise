@@ -8,6 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------------------
 public class SwingWindow extends JFrame implements ActionListener   {
     JButton bOk, bCancel;
     JLabel lLogin, lHaslo;
